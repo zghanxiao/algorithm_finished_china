@@ -21,7 +21,7 @@
 class NestedIterator {
 public:
     stack<NestedInteger> int_stack;
-    queue<int> queue_res;
+    int res;
     NestedIterator(vector<NestedInteger> &nestedList) {
       // Initialize your data structure here.
       int size = nestedList.size();
@@ -33,21 +33,17 @@ public:
     // @return {int} the next element in the iteration
     int next() {
       // Write your code here
-      int front_val = queue_res.front();
-      queue_res.pop();
-      return front_val;
+      return res;
     }
 
     // @return {boolean} true if the iteration has more element or false
     bool hasNext() {
       // Write your code here
-      int res;
       while(!int_stack.empty()) {
         NestedInteger item = int_stack.top();
         int_stack.pop();
         if (item.isInteger()) {
           res = item.getInteger();
-          queue_res.push(res);
           return true;
         } else {
           vector<NestedInteger> vec = item.getList();
@@ -65,4 +61,4 @@ public:
  * Your NestedIterator object will be instantiated and called as such:
  * NestedIterator i(nestedList);
  * while (i.hasNext()) v.push_back(i.next());
- */   
+ */
