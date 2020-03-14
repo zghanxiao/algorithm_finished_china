@@ -22,3 +22,8 @@ public:
       return res;
     }
 };
+
+int main() {
+  cout << "main 0" << endl;
+  return 0;
+}
