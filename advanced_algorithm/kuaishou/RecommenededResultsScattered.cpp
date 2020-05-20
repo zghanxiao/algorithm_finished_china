@@ -7,8 +7,6 @@ public:
      */
     vector<string> scatter(vector<string> &elements, int n) {
       // write your code here
-      vector<string> Pvec;
-      vector<string> Vvec;
       
       int size = elements.size();
       int iter;
@@ -23,54 +21,35 @@ public:
         return elements;
       }
       
+      queue<string> Pq;
+      queue<string> Vq;
+      
       int s_i = iter;
       for (; s_i < size; ++ s_i) {
         string element = elements[s_i];
         if (element[0] == 'P') {
-          Pvec.push_back(element);
+          Pq.push(element);
         } else {
-          Vvec.push_back(element);
+          Vq.push(element);
         }
       }
       
       int new_size = iter;
       elements.resize(new_size);
       
-      int p_i = 0;
-      int v_i = 0;
-      bool p_completed_flag = true;
-      bool v_completed_flag = true;
-      
-      bool p_stop_flag = false;
-      bool v_stop_flag = false;
-      while (true) {
+      while (!Pq.empty()) {
         
-        if (!v_completed_flag || p_i >= Pvec.size()) {
-          break;
-        }
+        elements.push_back(Pq.front());
+        Pq.pop();
         
-        p_completed_flag = false;
-        elements.push_back(Pvec[p_i]);
-        p_i ++;
-        p_completed_flag = true;
-        
-        if (!p_completed_flag || v_i >= Vvec.size()) {
-          break;
-        }
-        
-        v_completed_flag = false;
         int cnt = 0;
-        for (;v_i < Vvec.size(); ) {
-          elements.push_back(Vvec[v_i]);
-          cnt ++;
-          v_i ++;
-          if (cnt == n - 1) {
-            v_completed_flag = true;
-          }
-          
-          if (v_completed_flag) {
-            break;
-          }
+        for (; cnt < n - 1 && !Vq.empty(); cnt ++) {
+          elements.push_back(Vq.front());
+          Vq.pop();
+        }
+        
+        if (cnt != n - 1) {
+          break;
         }
       }
       return elements;
