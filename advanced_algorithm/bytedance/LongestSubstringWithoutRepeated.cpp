@@ -25,13 +25,18 @@ public:
   
   int lengthOfLongestSubstring(string s) {
     unordered_map<int, int> cnt;
-    int str_i = 0;
+    int str_i = -1;
     int pre_i = 0;
     int longest = 0;
     int size = s.size();
     while(true) {
-      for(;str_i < size; ++ str_i) {
-        cout << " str_i " << str_i << " ";
+      while(true) {
+        ++ str_i;
+        
+        if (str_i >= size) {
+          break;  
+        }
+        
         char ch = s[str_i];    
         if(inc_map(cnt, ch) > 1) {
           break;  
@@ -44,11 +49,9 @@ public:
       }
       
       for(;repeat(str_i, pre_i, cnt.size()); ++ pre_i) {
-        cout << " pre_i " << pre_i << " ";
         char ch = s[pre_i];    
         dec_map(cnt, ch);
       }
-      str_i ++;
     }
     return longest;
   }
