@@ -2,27 +2,23 @@ class Solution {
 public:
     int trap(vector<int>& heights) {
       int size = heights.size();
-      int sum_area = 0;
-      stack<int> stk;
-      for (int h_i = 0; h_i < size; ++ h_i) {
-        int height = heights[h_i];
-        int pre_h = 0;
-        while(!stk.empty()) {
-          int t_i = stk.top();  
-          int t_h = heights[t_i];
-          sum_area += (min(t_h, height) - pre_h) * (h_i - t_i - 1);
-          if (t_h <= height) {
-            stk.pop();
-          } else {
-            stk.push(h_i);
-            break;
-          }
-          pre_h = t_h;
-        }  
-        if (stk.empty()) {
-          stk.push(h_i);
+      int l = 0, r = size - 1;
+      int w_h = 0;
+      int tot_area = 0;
+      for (;l < r;) {
+        int lower_h = min(heights[l], heights[r]);
+        tot_area -= min(lower_h, w_h);
+        if (lower_h > w_h) {
+          tot_area += (lower_h - w_h) * ( r - l - 1);   
+          w_h = lower_h;
+        }
+        
+        if (heights[l] < heights[r]) {
+          ++ l;
+        } else {
+          -- r; 
         }
       }
-      return sum_area;
+      return tot_area;
     }
 };
