@@ -15,7 +15,10 @@ public:
     }
     
     // maitain min_h.size() == max_h.size() || min_h.size() + 1 == max_h.size()
+    //solution's three insertion and 2 pop is not good
+    // my version is two push and one pop at most
     void addNum(int num) {
+      
       if (min_h.size() == max_h.size()) {
         if (!min_h.empty() && num > min_h.top()) {
           min_h.push(num);
@@ -45,3 +48,10 @@ public:
       }    
     }
 };
+
+/**
+ * Your MedianFinder object will be instantiated and called as such:
+ * MedianFinder* obj = new MedianFinder();
+ * obj->addNum(num);
+ * double param_2 = obj->findMedian();
+ */
