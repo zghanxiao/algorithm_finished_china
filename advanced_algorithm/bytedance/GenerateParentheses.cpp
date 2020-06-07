@@ -35,10 +35,32 @@ public:
         paths.pop_back();
       }  
    }
-   vector<string> generateParenthesis(int n) {
+   vector<string> generateParenthesis1(int n) {
      vector<int> paths;
      vector<string> str_vec;
      combination(2 * n, n, 0, paths, 0, str_vec);
+     return str_vec;
+   }
+
+   void combination(string str, int left, int right, int size, vector<string> & str_vec, int depth) {
+      if (str.size() == size * 2) {
+        str_vec.push_back(str);
+        return;
+      }
+
+      if (left < size) {
+        combination(str + '(', left + 1, right, size, str_vec, depth + 1);
+      }
+
+      if (right < left) {
+        combination(str + ')', left, right + 1, size, str_vec, depth + 1);
+      }
+   }
+
+   vector<string> generateParenthesis(int n) {
+     vector<string> str_vec;
+     string str;
+     combination(str, 0, 0, n, str_vec, 0);
      return str_vec;
    }
 };
