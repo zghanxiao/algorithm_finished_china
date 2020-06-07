@@ -25,6 +25,9 @@ public:
    
       while(left < right) {
         int mid = left + (right - left) / 2;  
+        if (A[mid] == target &&(mid == 0 || A[mid] != A[mid - 1])) {
+          return mid;
+        }
         if (check(A, mid, left, right, target)) {
           right = mid;    
         } else {
