@@ -1,12 +1,10 @@
 class Solution {
 public:
-   int getIncLeft(vector<int> & paths) {
-     if (paths.size() < 1) {
-       return 0;
-     } else if (paths.size() == 1) {
-       return paths[0];
+   int getIncLeft(vector<int> & paths, int sel_i) {
+     if(paths.size() == 0) {
+       return sel_i;
      } else {
-       return paths[paths.size() - 1] - paths[paths.size() - 2] - 1;  
+       return sel_i - paths[paths.size() - 1] - 1;  
      }    
    }
    
@@ -22,17 +20,18 @@ public:
      return str;
    }
    
-   void combination(int total_num, int to_select, int index, vector<int> & paths, int left_cnt, vector<string> & str_vec) {
-      if (to_select == 0) {
+   void combination(int total_num, int tot_sel_num, int index, vector<int> & paths, int left_cnt, vector<string> & str_vec) {
+      if (tot_sel_num == paths.size()) {
         str_vec.push_back(formStr(paths, total_num));
         return;
       }
-      for (int sel_i = index; sel_i < total_num; ++ sel_i) {
-        paths.push_back(sel_i);       
-        int inc_left = getIncLeft(paths);
-        if (paths.size() <= left_cnt + inc_left) {
-          combination(total_num, to_select - 1, sel_i + 1, paths, left_cnt + inc_left, str_vec);
+      for (int sel_i = index; sel_i < total_num - (tot_sel_num - paths.size() - 1); ++ sel_i) {
+        int inc_left = getIncLeft(paths, sel_i);
+        if (inc_left + left_cnt < paths.size() + 1 ) {
+          continue;
         }
+        paths.push_back(sel_i);       
+        combination(total_num, tot_sel_num, sel_i + 1, paths, left_cnt + inc_left, str_vec);
         paths.pop_back();
       }  
    }
