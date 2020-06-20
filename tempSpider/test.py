@@ -18,3 +18,55 @@ req = Request(site,headers=hdr)
 page = urlopen(req)
 soup = BeautifulSoup(page, "html.parser")
 print(soup)
+divs = soup.findAll("ul")
+# divs = soup.findAll("div")
+# print(soup)
+cnt = 0
+for div in divs:
+  cnt += 1
+  # print(cnt)
+  #print('type')
+  #print(type(div))
+  # print(div)
+  # if cnt == 5:
+  #   break
+  
+  class_val = div.get('class')
+  if class_val and class_val[0] == 'scenic-list':
+    print(div)
+    children = div.findChildren()
+    print('children_0')
+    print(children)
+    print('children_1')
+    print(class_val) 
+  # print(divs)
+  # print('---------------')
+  # print('---------------')
+print(cnt)
+
+# response = urllib.request.urlopen(
+#  'https://shenyang.craigslist.org/')
+# print(response.read())
+# html = urlopen("http://www.mafengwo.cn/jd/10065/gonglve.html")
+# html.read().decode('utf-8')
+# soup = BeautifulSoup(html,"html.parer")
+# titles=soup.select("ul[class='scenic-list clearfix']") 
+# for title in titles:
+#     print(title)
+
+# import urllib.request
+# response = urllib.request.urlopen(
+#         'https://shenyang.craigslist.org/')
+# print(response.read())
+
+# from bs4 import BeautifulSoup
+# 
+# with open("index.html", "r") as f:
+#     
+#     contents = f.read()
+# 
+#     soup = BeautifulSoup(contents, 'lxml')
+# 
+#     print(soup.h2)
+#     print(soup.head)
+#     print(soup.li)
