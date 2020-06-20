@@ -50,21 +50,23 @@ while True:
     break
   #elements = (wd.find_elements_by_class_name('scenic-list'))
   elements = (wd.find_elements_by_class_name('scenic-list')[0].find_elements_by_tag_name('li'))
-  print(elements)
-  print(type(elements))
+  # print(elements)
+  # print(type(elements))
   for element in elements:
     #print(element)
     #print(type(element))
     print(element.find_elements_by_tag_name('h3')[0].text)
   # wd.find_element_by_id("kw").send_keys("selenium")   # 定位输入框并输入关键字
-  time.sleep(3)   #等待3秒
+  time.sleep(5)   #等待3秒
   
-  element = (wd.find_elements_by_class_name('pi'))[0]
-  if not element:
+  # element = (wd.find_elements_by_class_name('pi pg-next'))[0]
+  try:
+    element = wd.find_element_by_css_selector('.pi.pg-next')
+  except:
     break
-  print('button0')
+  # print('button0')
   element.click()
-  print('button1')
+  # print('button1')
   time.sleep(5)   #等待3秒
 
 #wd.find_element_by_id("su").click()   #点击[百度一下]搜索
