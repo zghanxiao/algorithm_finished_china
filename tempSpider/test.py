@@ -44,7 +44,7 @@ wd.get("http://www.mafengwo.cn/jd/10065/gonglve.html")    # 打开百度浏览�
 time.sleep(5)
 page_cnt = 0
 while True:
-  print(page_cnt)
+  # print(page_cnt)
   page_cnt += 1
   if page_cnt == 100:
     break
@@ -53,9 +53,10 @@ while True:
   # print(elements)
   # print(type(elements))
   for element in elements:
-    #print(element)
-    #print(type(element))
-    print(element.find_elements_by_tag_name('h3')[0].text)
+    # print(element)
+    # print(type(element))
+    # print(element.find_elements_by_tag_name('h3')[0].text)
+    print(element.find_elements_by_tag_name('a')[0].get_attribute('href'))
   # wd.find_element_by_id("kw").send_keys("selenium")   # 定位输入框并输入关键字
   time.sleep(5)   #等待3秒
   
